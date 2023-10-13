@@ -3,9 +3,9 @@ import "./SingleCard.css";
 import React from "react";
 
 export default function SingleCard({ card, handleChoice }) {
-  const handleClick = () => {
+  /* const handleClick = () => {
     handleChoice(card);
-  };
+  }; */
   return (
     <div className="card">
       <div>
@@ -14,7 +14,7 @@ export default function SingleCard({ card, handleChoice }) {
           className="back"
           src="/img/cover.png"
           alt="card back"
-          onClick={handleClick}
+          onClick={() => handleChoice(card)}
         />
       </div>
     </div>
