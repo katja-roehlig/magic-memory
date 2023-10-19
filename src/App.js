@@ -46,7 +46,7 @@ function App() {
         setCards((prevCards) => {
           return prevCards.map((card) => {
             if (card.src === choiceOne.src) {
-              return { ...card, matched: true };
+              return { ...card, matched: true  };
             } else {
               return card;
             }
@@ -55,8 +55,8 @@ function App() {
         console.log("Match!");
         resetTurn();
       } else {
-        console.log("No Match!");
-        resetTurn();
+        setTimeout(() => resetTurn(), 1000)
+        
       }
     }
   }, [choiceOne, choiceTwo]);
@@ -74,7 +74,10 @@ function App() {
 
       <div className="card-grid">
         {cards.map((card) => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} />
+          <SingleCard key={card.id} 
+          card={card} 
+          handleChoice={handleChoice} 
+          flipped={card === choiceOne|| card === choiceTwo || card.matched === true}/>
         ))}
       </div>
     </div>
