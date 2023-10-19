@@ -2,10 +2,13 @@ import "./SingleCard.css";
 
 import React from "react";
 
-export default function SingleCard({ card, handleChoice, flipped }) {
-  /* const handleClick = () => {
-    handleChoice(card);
-  }; */
+export default function SingleCard({ card, handleChoice, flipped, disabled }) {
+  const handleClick = () => {
+    if(!disabled){
+
+      handleChoice(card);
+    }
+  };
   return (
     <div className="card">
       <div className={flipped ? "flipped" : ""}>
@@ -14,7 +17,7 @@ export default function SingleCard({ card, handleChoice, flipped }) {
           className="back"
           src="/img/cover.png"
           alt="card back"
-          onClick={() => handleChoice(card)}
+          onClick={() => handleClick(card)}
         />
       </div>
     </div>

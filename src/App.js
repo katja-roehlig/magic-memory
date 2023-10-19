@@ -17,6 +17,7 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
+  const[disabled,setDisabled] = useState(false)
 
   //Math.random liefert Zahlen zwischen 0 und 1
   //sort() vergleicht 2 Items(a,b) und gibt einen Wert zwischen -0.5 und 0.5 zurück.
@@ -41,7 +42,9 @@ function App() {
 
   // compare two selected cards
   useEffect(() => {
+    
     if (choiceOne && choiceTwo) {
+      setDisabled(true)
       if (choiceOne.src === choiceTwo.src) {
         setCards((prevCards) => {
           return prevCards.map((card) => {
@@ -65,6 +68,7 @@ function App() {
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
+    setDisabled(false)
     setTurns((prevCount) => prevCount++);
   };
   return (
@@ -74,7 +78,9 @@ function App() {
 
       <div className="card-grid">
         {cards.map((card) => (
-          <SingleCard key={card.id} 
+          <SingleCard 
+          key={card.id} 
+          disabled={disabled}
           card={card} 
           handleChoice={handleChoice} 
           flipped={card === choiceOne|| card === choiceTwo || card.matched === true}/>
