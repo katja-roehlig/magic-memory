@@ -29,7 +29,9 @@ function App() {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() })); //Jeder Karte eine ID zuordnen
-
+      
+    setChoiceOne(null)
+    setChoiceTwo(null)
     setCards(shuffledCards);
 
     setTurns(0);
@@ -69,8 +71,13 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setDisabled(false)
-    setTurns((prevCount) => prevCount++);
+    setTurns((prevCount) => prevCount+1);
   };
+
+  //start the game automatically
+useEffect(() => {getCards()}, [])
+
+
   return (
     <div className="App">
       <h1>Magic Match</h1>
@@ -86,6 +93,7 @@ function App() {
           flipped={card === choiceOne|| card === choiceTwo || card.matched === true}/>
         ))}
       </div>
+      <p>Turns: {turns}</p>
     </div>
   );
 }
